@@ -1,36 +1,124 @@
 <template>
-  <el-menu
-    :default-active="activeIndex2"
-    class="el-menu-demo"
-    mode="horizontal"
-    background-color="#545c64"
-    text-color="#fff"
-    active-text-color="#ffd04b"
-    @select="handleSelect"
-  >
-    <el-menu-item index="1">AutoInstall</el-menu-item>
-    <el-sub-menu index="2">
-      <template #title>Workspace</template>
-      <el-menu-item index="2-1">item one</el-menu-item>
-      <el-menu-item index="2-2">item two</el-menu-item>
-      <el-menu-item index="2-3">item three</el-menu-item>
-      <el-sub-menu index="2-4">
-        <template #title>item four</template>
-        <el-menu-item index="2-4-1">item one</el-menu-item>
-        <el-menu-item index="2-4-2">item two</el-menu-item>
-        <el-menu-item index="2-4-3">item three</el-menu-item>
-      </el-sub-menu>
-    </el-sub-menu>
-    <el-menu-item index="3" disabled>Info</el-menu-item>
-    <el-menu-item index="4">Orders</el-menu-item>
-  </el-menu>
+  <div class="wrapper">
+    <!-- 页面头部部分 -->
+    <div class="header">
+      <div class="logo">AutoInstall</div>
+      <!-- 水平一级菜单 -->
+      <div style="float:left;">
+        <el-menu 
+          mode="horizontal"
+          text-color="#000000"
+          active-text-color="#3989fa"
+          :default-active="toIndex" 
+          @select="handleSelect">
+          <el-menu-item v-for="(item, index) in itemList" :index="item.path" :key="index">
+            <span slot="title">{{ item.title }}</span>
+          </el-menu-item>
+        </el-menu>
+      </div>
+    </div>
+ 
+  </div>
 </template>
-
-<script lang="ts" setup>
-import { ref } from 'vue'
-
-const activeIndex2 = ref('1')
-const handleSelect = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath)
+ 
+<script>
+export default {
+  data(){
+    return{
+      itemList: [    // 水平一级菜单栏的菜单
+        { path: '/Home', title: '首页' },
+        { path: '/test1', title: '一级菜单1' },
+        { path: '/test2', title: '一级菜单2' },
+        { path: '/test3', title: '一级菜单3' },
+        // { path: '/i18n', title: '国际化组件' }
+      ],
+    }
+  },
+  computed: {
+    username(){
+      return localStorage.getItem('ms_username') || '';
+    },
+    toIndex(){  // 根据路径绑定到对应的一级菜单，防止页面刷新重新跳回第一个
+      return '/' + this.$route.path.split('/')[1];
+    },
+  },
+  created() {
+    
+  },
+  methods: {
+    handleSelect(path){  // 切换菜单栏
+      this.$router.push({
+        path: path
+      });
+    },
+  }
 }
 </script>
+ 
+<style scoped>
+.wrapper {
+  width: 100%;
+  height: 100%;
+  background: #f0f0f0;
+}
+.header {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  height: 70px;
+  font-size: 22px;
+}
+.header .logo {
+  float: left;
+  margin-left: 60px;
+  margin-top: 17.5px;
+  height: 29px;
+  width: 160px;
+  vertical-align: middle;
+}
+/* --------------- 用户头像区域的样式 ---------------- */
+.header-right {
+  float: right;
+  padding-right: 50px;
+}
+.header-user-con {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70px;
+}
+.user-avator {
+  margin-left: 20px;
+}
+.user-avator img {
+  display: block;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.user-name {
+  margin-left: 10px;
+}
+.el-dropdown-link {
+  cursor: pointer;
+}
+.el-dropdown-menu__item {
+  text-align: center;
+}
+/* --------------- 水平一级菜单栏的样式--------------------- */
+.el-menu.el-menu--horizontal {
+  border-bottom: none !important;
+  float: left;
+  margin-left: 50px;
+  background: transparent;
+}
+.el-menu--horizontal > .el-menu-item.is-active {
+  /* border-bottom: 2px solid #3989fa;
+  color: #3989fa; */
+  font-weight: bold;
+}
+.el-menu--horizontal > .el-menu-item {
+  font-size: 16px;
+  margin: 0 15px;
+}
+</style>
