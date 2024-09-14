@@ -4,7 +4,7 @@
     <div class="header">
       <div class="logo">AutoInstall</div>
       <!-- 水平一级菜单 -->
-      <div style="float:left;">
+      <div style="float:center;">
         <el-menu 
           mode="horizontal"
           text-color="#000000"
@@ -62,13 +62,13 @@ export default {
   position: relative;
   box-sizing: border-box;
   width: 100%;
-  height: 70px;
+  height: 50px;
   font-size: 22px;
 }
 .header .logo {
   float: left;
-  margin-left: 60px;
-  margin-top: 17.5px;
+  margin-left: 30px;
+  margin-top: 9.5px;
   height: 29px;
   width: 160px;
   vertical-align: middle;
@@ -76,7 +76,7 @@ export default {
 /* --------------- 水平一级菜单栏的样式--------------------- */
 .el-menu.el-menu--horizontal {
   border-bottom: none !important;
-  float: left;
+  float: center;
   margin-left: 50px;
   background: transparent;
 }
@@ -86,7 +86,7 @@ export default {
   font-weight: bold;
 }
 .el-menu--horizontal > .el-menu-item {
-  font-size: 16px;
-  margin: 0 15px;
+  font-size: 15px;
+  margin: 1 6px;
 }
 </style>
