@@ -35,9 +35,6 @@ export default {
     }
   },
   computed: {
-    username(){
-      return localStorage.getItem('ms_username') || '';
-    },
     toIndex(){  // 根据路径绑定到对应的一级菜单，防止页面刷新重新跳回第一个
       return '/' + this.$route.path.split('/')[1];
     },
@@ -75,35 +72,6 @@ export default {
   height: 29px;
   width: 160px;
   vertical-align: middle;
-}
-/* --------------- 用户头像区域的样式 ---------------- */
-.header-right {
-  float: right;
-  padding-right: 50px;
-}
-.header-user-con {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 70px;
-}
-.user-avator {
-  margin-left: 20px;
-}
-.user-avator img {
-  display: block;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-}
-.user-name {
-  margin-left: 10px;
-}
-.el-dropdown-link {
-  cursor: pointer;
-}
-.el-dropdown-menu__item {
-  text-align: center;
 }
 /* --------------- 水平一级菜单栏的样式--------------------- */
 .el-menu.el-menu--horizontal {
